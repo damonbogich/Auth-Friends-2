@@ -1,6 +1,7 @@
 import react, {useState, useEffect} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import Loader from 'react-loader-spinner';
+import NavBar from './NavBar';
 
 import Friend from './Friend';
 
@@ -10,7 +11,7 @@ export default function FriendsList() {
 
     useEffect(() => {
         getData(); 
-    })
+    }, [])
     const getData = () => {
         axiosWithAuth()
         .get('/api/friends')
@@ -23,6 +24,7 @@ export default function FriendsList() {
     };
     return (
         <>
+        <NavBar/>
         {isLoading && <Loader type="Puff" color="#204963" height="160" width="160"/>}
         {friends.map((friend) => {
             return <Friend friend={friend} key={friend.id}/>
