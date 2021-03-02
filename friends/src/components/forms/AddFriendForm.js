@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {axiosWithAuth} from '../../utils/axiosWithAuth';
 import { useHistory } from "react-router";
 
-export default function AddFriendForm() {
+export default function AddFriendForm({setView}) {
     const [friend, setFriend] = useState({name: "", age: "", email: ""});
     const history = useHistory();
 
@@ -26,7 +26,7 @@ export default function AddFriendForm() {
             setFriend({
                 name: "", age: "", email: ""
             });
-            history.push('/friendslist');
+            setView(null)
         })
         .catch(err => {
             console.log(err)

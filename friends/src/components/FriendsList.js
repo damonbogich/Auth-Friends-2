@@ -2,16 +2,20 @@ import react, {useState, useEffect} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import Loader from 'react-loader-spinner';
 import NavBar from './NavBar';
+import AddFriendForm from './forms/AddFriendForm';
+import DeleteFriendForm from './forms/DeleteFriend';
+import EditFriendForm from './forms/EditFriendForm';
 
 import Friend from './Friend';
 
 export default function FriendsList() {
     const [friends, setFriends] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [view, setView] = useState(null);
 
     useEffect(() => {
         getData(); 
-    }, [])
+    }, [view])
     const getData = () => {
         axiosWithAuth()
         .get('/api/friends')
@@ -24,12 +28,14 @@ export default function FriendsList() {
     };
     return (
         <>
-        <NavBar/>
+        <NavBar view={view} setView={setView}/>
         {isLoading && <Loader type="Puff" color="#204963" height="160" width="160"/>}
-        {friends.map((friend) => {
+        {!(view) && friends.map((friend) => {
             return <Friend friend={friend} key={friend.id}/>
         })}
-
+        {(view ==='add') && <AddFriendForm setView={setView}/>}
+        {(view ==='edit') && <EditFriendForm/>}
+        {(view ==='delete') && <DeleteFriendForm/>}
         </>
     )
 }
