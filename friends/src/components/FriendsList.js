@@ -12,6 +12,7 @@ export default function FriendsList() {
     const [friends, setFriends] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [view, setView] = useState(null);
+    const [friendIdToEdit, setFriendIdToEdit] = useState(null);
 
     useEffect(() => {
         getData(); 
@@ -31,10 +32,10 @@ export default function FriendsList() {
         <NavBar view={view} setView={setView}/>
         {isLoading && <Loader type="Puff" color="#204963" height="160" width="160"/>}
         {!(view) && friends.map((friend) => {
-            return <Friend friend={friend} key={friend.id}/>
+            return <Friend friend={friend} key={friend.id} setFriendIdToEdit={setFriendIdToEdit} setView={setView}/>
         })}
         {(view ==='add') && <AddFriendForm setView={setView}/>}
-        {(view ==='edit') && <EditFriendForm/>}
+        {(view ==='edit') && <EditFriendForm friend_id={friendIdToEdit} setView={setView}/>}
         {(view ==='delete') && <DeleteFriendForm/>}
         </>
     )
