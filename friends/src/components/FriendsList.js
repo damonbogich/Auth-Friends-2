@@ -32,7 +32,7 @@ export default function FriendsList() {
         <NavBar view={view} setView={setView}/>
         {isLoading && <Loader type="Puff" color="#204963" height="160" width="160"/>}
         {!(view) && friends.map((friend) => {
-            return <Friend friend={friend} key={friend.id} setFriendIdToEdit={setFriendIdToEdit} setView={setView}/>
+            return <Friend friend={friend} key={friend.id} setFriendIdToEdit={setFriendIdToEdit} setView={setView} setFriends={setFriends}/>
         })}
         {(view ==='add') && <AddFriendForm setView={setView}/>}
         {(view ==='edit') && <EditFriendForm friend_id={friendIdToEdit} setView={setView}/>}
