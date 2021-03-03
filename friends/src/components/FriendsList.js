@@ -3,7 +3,6 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
 import Loader from 'react-loader-spinner';
 import NavBar from './NavBar';
 import AddFriendForm from './forms/AddFriendForm';
-import DeleteFriendForm from './forms/DeleteFriend';
 import EditFriendForm from './forms/EditFriendForm';
 
 import Friend from './Friend';
@@ -36,7 +35,6 @@ export default function FriendsList() {
         })}
         {(view ==='add') && <AddFriendForm setView={setView}/>}
         {(view ==='edit') && <EditFriendForm friend_id={friendIdToEdit} setView={setView}/>}
-        {(view ==='delete') && <DeleteFriendForm/>}
         </>
     )
 }
